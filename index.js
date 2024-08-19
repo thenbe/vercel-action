@@ -57,6 +57,10 @@ function retry(fn, retries) {
 
 // Vercel
 function getVercelBin() {
+	const customVercelBin = core.getInput('vercel-binary');
+	if (customVercelBin) {
+		return customVercelBin
+	}
   const input = core.getInput('vercel-version');
   const fallback = packageJSON.dependencies.vercel;
   return `vercel@${input || fallback}`;
